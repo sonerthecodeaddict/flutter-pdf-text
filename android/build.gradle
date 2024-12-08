@@ -2,22 +2,22 @@ group 'dev.aluc.pdf_text'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.5.21' // Kotlin sürümünü güncelledim
     repositories {
         google()
-        jcenter()
+        mavenCentral() // JCenter, eski olduğu için yerine mavenCentral kullanmak daha iyi
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+        classpath 'com.android.tools.build:gradle:4.2.2' // AGP'yi güncelledim
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral() // JCenter yerine mavenCentral kullanmak daha güvenli
     }
 }
 
@@ -25,15 +25,21 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 33 // En güncel compileSdkVersion kullanıldı
+
+    // `namespace` özelliği eklendi
+    namespace "dev.aluc.pdf_text"
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
     defaultConfig {
         minSdkVersion 16
+        targetSdkVersion 33 // targetSdkVersion güncellenmiş oldu
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     lintOptions {
         disable 'InvalidPackage'
     }
